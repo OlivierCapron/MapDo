@@ -54,14 +54,37 @@ npm run dev
 
 npm run build
 
-Déploiement  sur : - Vercel
+Déploiement  sur  Vercel
 
 ------------------------------------------------------------------------
 ------------------------------------------------------------------------
 
 ## Creation du projet 
 
-npm create vite@latest
-npm install
-npm run dev
+1. npm create vite@latest
+2. npm install
+3. npm run dev
 
+Initialisation de Git
+
+1. git init
+2. git add .
+3. git commit -m "Initial commit"
+
+Association avec GitHub
+
+1. git remote add origin https://github.com/OlivierCapron/MapDo
+2. git branch -M main
+3. git push -u origin main
+
+
+
+
+##  Composants utilisés : 
+
+	- App : Composant de base qui centralise l'etat global de l'application
+	- Carte : affiche la carte, les marqueurs et gere le centrage suivant la position de l'utilisateur
+	- ChampRecherche : input de texte + Bouton de validation + Affichage des marqueurs
+	- ListeSuggestions : Affichage des suggestions + clic sur ville suggerée
+	- Marqueur : gere la popup avec les details du restaurant
+	- DetailsRestaurant : Contient les infos "Aucun restaurant selectionn" ou les details du restaurant
