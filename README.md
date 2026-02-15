@@ -1,16 +1,67 @@
-# React + Vite
+#  Projet MapDo
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Etape du developpement: 
 
-Currently, two official plugins are available:
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+##  Objectifs
 
-## React Compiler
+Une application React permettant de :
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+-   Rechercher une ville
+-   Afficher une carte interactive
+-   Localiser les restaurants McDonald's
+-   Sélectionner un restaurant et afficher ses informations
 
-## Expanding the ESLint configuration
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+
+------------------------------------------------------------------------
+
+## Technologies 
+
+-   React.js
+-   React Leaflet
+-   Nominatim
+	- Recherche de villes + suggestions
+	- Recherche de restaurants
+-   React Testing Library
+
+
+
+------------------------------------------------------------------------
+
+## Parcours utilisateur
+
+1.  L'utilisateur arrive sur une carte vide centree sur sa position (via leur IP)
+2.  Il cherche une ville
+3.  Des suggestions s'affichent
+4.  Il sélectionne une ville
+5.  La carte est centrée sur la ville
+6.  Les restaurants apparaissent sous forme de marqueurs
+7.  Un clic sur un marqueur affiche une popup
+8.  Le bouton "Sélectionner" met à jour l'overlay
+
+------------------------------------------------------------------------
+
+## Installation
+
+npm install 
+npm run dev
+
+
+------------------------------------------------------------------------
+
+## Build production
+
+npm run build
+
+Déploiement  sur : - Vercel
+
+------------------------------------------------------------------------
+------------------------------------------------------------------------
+
+## Creation du projet 
+
+npm create vite@latest
+npm install
+npm run dev
+
