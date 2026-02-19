@@ -78,7 +78,9 @@ Association avec GitHub
 3. git push -u origin main
 
 
+Installation de leaflet
 
+npm install react-leaflet leaflet
 
 ##  Composants utilisés : 
 
