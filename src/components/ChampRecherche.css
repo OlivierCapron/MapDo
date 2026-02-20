@@ -1,0 +1,26 @@
+.recherche-input-group {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex-wrap: wrap;  
+}
+
+.recherche-input
+{
+  flex: 1;
+  height: 42px;
+  padding: 0 14px;
+  border-radius: 10px;
+  border: 2px solid #9b9b9b;
+  background: #ffffff;
+  font-family: 'Inter', sans-serif;
+  font-size: 14px;
+  color: #333;
+  transition: border 0.2s ease, box-shadow 0.2s ease;
+}
+
+.suggestions-liste {
+  margin-top: 0px;
+  width: 100%;
+  overflow-y: auto;
+}
