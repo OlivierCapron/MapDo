@@ -9,7 +9,7 @@ export const searchCity = (query) =>
     params: {
       q: query,
       format: "jsonv2",
-      limit: 5,
+      limit: 10,
     },
   });
 
