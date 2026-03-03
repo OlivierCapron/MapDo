@@ -5,6 +5,7 @@ import { useEffect, useState } from "react";
 import { rechercherRestaurants } from "../services/nominatimApi";
 import CentreurMap from "./CentreurMap";
 import styled from "styled-components";
+import Geolocalisation from "./Geolocalisation";
 
 const PopupContenu = styled.div`
 display: flex;
@@ -63,6 +64,7 @@ function Carte({ villeSelectionnee, setRestaurantSelectionne }) {
         style={{ height: "100%", width: "100%" }}
       >
         <CentreurMap restaurants={restaurants} />
+        <Geolocalisation/>
         <TileLayer
           attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
           url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
@@ -82,7 +84,6 @@ function Carte({ villeSelectionnee, setRestaurantSelectionne }) {
                   <PopupTitre>
                     {restaurant.display_name}
                   </PopupTitre>
-
                   <PopupBoutton  onClick={() => 
                       setRestaurantSelectionne(restaurant)}
                   >Choisir</PopupBoutton>
