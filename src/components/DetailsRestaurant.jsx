@@ -14,46 +14,59 @@ const DetailsRestaurantOverlay = styled.div`
   box-shadow: 0 -8px 3px rgba(0, 0, 0, 0.25);
   backdrop-filter: blur(2px);
   width: 100%;
-    box-sizing: border-box;
+  box-sizing: border-box;
 `;
 
 const DetailsRestaurantTitre = styled.div`
   font-weight: 600;
   font-size: 16px;
   margin-bottom: 8px;
-  
 `;
 
-const DetailsRestaurantTexte = styled.div`
+const DetailsRestaurantBoutton = styled.button`
+  align-self: flex-start;
+  padding: 8px 10px;
+  border-radius: 8px;
+  border: none;
+  background: #f0c900;
+  color: black;
+  cursor: pointer;
+  font-size: 13px;
+  font-weight: 600;
+  &:hover {
+    background: #e0ba00;
+  }
+`;
 
-`
-function DetailsRestaurant({restaurantSelectionne}) {
-
-    console.log("DetailsRestaurant init ; "+restaurantSelectionne)
-    const titre = restaurantSelectionne
+const DetailsRestaurantTexte = styled.div``;
+function DetailsRestaurant({ restaurantSelectionne }) {
+  console.log("DetailsRestaurant init ; " + restaurantSelectionne);
+  const titre = restaurantSelectionne
     ? "Restaurant sélectionné"
     : "Aucun restaurant sélectionné";
-        const [detailRestaurant,setDetailRestaurant] = useState("");
+  const [detailRestaurant, setDetailRestaurant] = useState("");
 
+  useEffect(() => {
+    if (!restaurantSelectionne) return;
 
-      useEffect(() => {
-        if (!restaurantSelectionne) return;
-    
-        const afficherDetails = () => {
-            console.log("useEffect de DetailsRestaurant "+restaurantSelectionne)
-            setDetailRestaurant(restaurantSelectionne);
-        };
-    
-        afficherDetails();
+    const afficherDetails = () => {
+      console.log("useEffect de DetailsRestaurant " + restaurantSelectionne);
+      setDetailRestaurant(restaurantSelectionne);
+    };
 
-      }, [restaurantSelectionne,titre]);
+    afficherDetails();
+  }, [restaurantSelectionne, titre]);
 
-
-    return(
-        <DetailsRestaurantOverlay>
-            <DetailsRestaurantTitre>{titre}</DetailsRestaurantTitre>
-            <DetailsRestaurantTexte>{detailRestaurant.display_name}</DetailsRestaurantTexte>
-        </DetailsRestaurantOverlay>
-    )
+  return (
+    <DetailsRestaurantOverlay>
+      <DetailsRestaurantTitre>{titre}</DetailsRestaurantTitre>
+      <DetailsRestaurantTexte>
+        {detailRestaurant.display_name}
+      </DetailsRestaurantTexte>
+      {restaurantSelectionne && (
+        <DetailsRestaurantBoutton>Continuer</DetailsRestaurantBoutton>
+      )}
+    </DetailsRestaurantOverlay>
+  );
 }
 export default DetailsRestaurant;
