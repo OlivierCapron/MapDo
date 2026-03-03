@@ -1,19 +1,42 @@
-import "./BarreRecherche.css";
+import styled from "styled-components";
 
 import ChampRecherche from './ChampRecherche';
 
 
-function BarreRecherche() {
 
-    const rechercheVille = (ville) => {
-    console.log("Ville  :", ville);
-  };
+const OverlayBarreRecherche = styled.div`
+  position: absolute;
+  top: 15px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 1000;
+
+  background: rgba(255, 255, 255, 0.7);
+  padding: 20px 24px;
+  border-radius: 15px;
+  box-shadow:
+    0 10px 30px rgba(0, 0, 0, 0.15),
+    0 2px 8px rgba(0, 0, 0, 0.08);
+
+  backdrop-filter: blur(4px);
+  width: 420px;
+}`
+const TitreBarreRecherche = styled.span`
+display: block;
+  margin-bottom: 8px;
+  
+  font-size: 16px;
+  color: rgb(0, 0, 0)
+`
+function BarreRecherche({ onVilleSelectionnee }) {
+
+ 
   
      return (
-      <div className="recherche-overlay">
-        <span>Rechercher un restaurant</span>
-       <ChampRecherche className="champ-recherche" onSelect={rechercheVille}></ChampRecherche>
-      </div>
+      <OverlayBarreRecherche>
+        <TitreBarreRecherche>Rechercher un restaurant</TitreBarreRecherche>
+       <ChampRecherche className="champ-recherche" onVilleSelectionnee={onVilleSelectionnee} ></ChampRecherche>
+      </OverlayBarreRecherche>
   );
 }
 export default BarreRecherche;

@@ -90,3 +90,9 @@ npm install react-leaflet leaflet
 	- ListeSuggestions : Affichage des suggestions + clic sur ville suggerée
 	- Marqueur : gere la popup avec les details du restaurant
 	- DetailsRestaurant : Contient les infos "Aucun restaurant selectionn" ou les details du restaurant
+
+
+On autocomplete les villes avec    https://nominatim.openstreetmap.org/search?<params>
+
+On utilise https://nominatim.openstreetmap.org/lookup?osm_ids=R146656,W50637691,N240109189 pour trouver la box d'une ville
+
