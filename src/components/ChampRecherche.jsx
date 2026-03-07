@@ -124,7 +124,7 @@ function ChampRecherche() {
           />
         ))}
       </SuggestionsListe>
-      {erreur && <MessageErreur>{erreur}</MessageErreur>}
+      {erreur && <MessageErreur data-testid="MessageErreur">{erreur}</MessageErreur>}
     </RechercheOverlay>
   );
 }

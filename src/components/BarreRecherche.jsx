@@ -1,7 +1,6 @@
 import styled from "styled-components";
 
 import ChampRecherche from './ChampRecherche';
-import { useAppContext } from "../hook/useAppContext";
 
 
 const OverlayBarreRecherche = styled.div`
