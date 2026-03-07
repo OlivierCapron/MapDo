@@ -1,6 +1,6 @@
-import { useEffect, useState } from "react";
 import styled from "styled-components";
-import { useAppContext } from "../hook/useAppContext";
+import { useSelector } from "react-redux";
+
 const DetailsRestaurantOverlay = styled.div`
   position: absolute;
   bottom: 0px;
@@ -33,42 +33,45 @@ const DetailsRestaurantBoutton = styled.button`
   cursor: pointer;
   font-size: 13px;
   font-weight: 600;
+
   &:hover {
     background: #e0ba00;
   }
 `;
 
 const DetailsRestaurantTexte = styled.div``;
+
 function DetailsRestaurant() {
 
-    const { restaurantSelectionne } = useAppContext();
-  console.log("DetailsRestaurant init ; " + restaurantSelectionne);
+  const restaurantSelectionne = useSelector(
+    state => state.restaurant.restaurantSelectionne
+  );
+
   const titre = restaurantSelectionne
     ? "Restaurant sélectionné"
     : "Aucun restaurant sélectionné";
-  const [detailRestaurant, setDetailRestaurant] = useState("");
-
-  useEffect(() => {
-    if (!restaurantSelectionne) return;
-
-    const afficherDetails = () => {
-      console.log("useEffect de DetailsRestaurant " + restaurantSelectionne);
-      setDetailRestaurant(restaurantSelectionne);
-    };
-
-    afficherDetails();
-  }, [restaurantSelectionne, titre]);
 
   return (
     <DetailsRestaurantOverlay>
-      <DetailsRestaurantTitre>{titre}</DetailsRestaurantTitre>
-      <DetailsRestaurantTexte>
-        {detailRestaurant.display_name}
-      </DetailsRestaurantTexte>
+
+      <DetailsRestaurantTitre>
+        {titre}
+      </DetailsRestaurantTitre>
+
       {restaurantSelectionne && (
-        <DetailsRestaurantBoutton>Continuer</DetailsRestaurantBoutton>
+        <>
+          <DetailsRestaurantTexte>
+            {restaurantSelectionne.display_name}
+          </DetailsRestaurantTexte>
+
+          <DetailsRestaurantBoutton>
+            Continuer
+          </DetailsRestaurantBoutton>
+        </>
       )}
+
     </DetailsRestaurantOverlay>
   );
 }
+
 export default DetailsRestaurant;

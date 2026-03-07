@@ -7,6 +7,11 @@ import CentreurMap from "./CentreurMap";
 import styled from "styled-components";
 import Geolocalisation from "./Geolocalisation";
 import { useAppContext } from "../hook/useAppContext";
+
+
+import { useDispatch } from "react-redux";
+import { setRestaurantSelectionne } from "../store/restaurantSlice";
+
 const PopupContenu = styled.div`
 display: flex;
   flex-direction: column;
@@ -35,8 +40,8 @@ const PopupBoutton = styled.button`
 `;
 function Carte() {
 
-    const { villeSelectionnee, setRestaurantSelectionne } = useAppContext();
-
+    const { villeSelectionnee } = useAppContext();
+const dispatch = useDispatch();
   const position = [48.858, 2.357];
   const [restaurants, setRestaurants] = useState([]);
 
@@ -61,6 +66,7 @@ function Carte() {
   return (
     <div className="leaflet-container">
       <MapContainer
+        data-testid="map"
         center={position}
         zoom={13}
         scrollWheelZoom={true}
@@ -81,14 +87,14 @@ function Carte() {
           console.log(positionRest);
 
           return (
-            <Marker key={restaurant.place_id} position={positionRest}>
+            <Marker key={restaurant.place_id} position={positionRest} data-testid="marker">
               <Popup>
                 <PopupContenu>
                   <PopupTitre>
                     {restaurant.display_name}
                   </PopupTitre>
                   <PopupBoutton  onClick={() => 
-                      setRestaurantSelectionne(restaurant)}
+                      dispatch(setRestaurantSelectionne(restaurant))}
                   >Choisir</PopupBoutton>
                 </PopupContenu>
               </Popup>

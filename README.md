@@ -102,5 +102,6 @@ npm install -D vitest
 npm install -D @testing-library/react
 npm install -D @testing-library/jest-dom
 npm install -D jsdom
+npm install @reduxjs/toolkit react-redux
 
 LAncement : npx vitest
