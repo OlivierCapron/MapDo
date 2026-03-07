@@ -6,7 +6,7 @@ import { rechercherRestaurants } from "../services/nominatimApi";
 import CentreurMap from "./CentreurMap";
 import styled from "styled-components";
 import Geolocalisation from "./Geolocalisation";
-
+import { useAppContext } from "../hook/useAppContext";
 const PopupContenu = styled.div`
 display: flex;
   flex-direction: column;
@@ -33,7 +33,10 @@ const PopupBoutton = styled.button`
     background: #e0ba00;
   }
 `;
-function Carte({ villeSelectionnee, setRestaurantSelectionne }) {
+function Carte() {
+
+    const { villeSelectionnee, setRestaurantSelectionne } = useAppContext();
+
   const position = [48.858, 2.357];
   const [restaurants, setRestaurants] = useState([]);
 

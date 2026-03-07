@@ -1,84 +1,106 @@
-import {  useState } from "react";
+import { useState, useMemo, useCallback } from "react";
 import { rechercherVille } from "../services/nominatimApi";
 import Suggestion from "./Suggestion";
 import styled from "styled-components";
+import { useAppContext } from "../hook/useAppContext";
 
-
- const RechercheOverlay = styled.div`
+const RechercheOverlay = styled.div`
   display: flex;
   align-items: center;
   gap: 10px;
-  flex-wrap: wrap;  `
+  flex-wrap: wrap;
+`;
 
- const RechercheInput = styled.input`
+const RechercheInput = styled.input`
   flex: 1;
   height: 42px;
   padding: 0 14px;
   border-radius: 10px;
   border: 2px solid #9b9b9b;
   background: #ffffff;
-  font-family: 'Inter', sans-serif;
+  font-family: "Inter", sans-serif;
   font-size: 14px;
   color: #333;
-  transition: border 0.2s ease, box-shadow 0.2s ease;`
+  transition:
+    border 0.2s ease,
+    box-shadow 0.2s ease;
+`;
 
-  const SuggestionsListe = styled.div`
-    margin-top: 0px;
+const SuggestionsListe = styled.div`
+  margin-top: 0px;
   width: 100%;
-  overflow-y: auto;`
+  overflow-y: auto;
+`;
 
+const MessageErreur = styled.div`
+  width: 100%;
+  margin-top: 6px;
+  color: #d32f2f;
+  font-size: 13px;
+  font-weight: 500;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+`;
 
-
-
-function ChampRecherche({ onVilleSelectionnee }) {
+function ChampRecherche() {
+  const { setVilleSelectionnee } = useAppContext();
   const [searchQuery, setSearchQuery] = useState("");
   const [suggestions, setSuggestions] = useState([]);
+  const [erreur, setErreur] = useState("");
 
-const recupererSuggestions = async (e) => {
-      setSearchQuery(e)
-      if (!searchQuery || searchQuery.trim().length < 3) {
-        setSuggestions([]);
-        return;
-      }
+  const suggestionsMemo = useMemo(() => {
+    return suggestions;
+  }, [suggestions]);
 
-      try {
-        const result = await rechercherVille(e);
-      console.log("Suggestions de villes :");
-      console.log(result.data);
+  const recupererSuggestions = useCallback(async (e) => {
+    setSearchQuery(e);
 
-        setSuggestions(result.data);
-      } catch (error) {
-        console.error(error);
-      }
-    };
- 
-  const rechercher = async () => {
-      if (!searchQuery || searchQuery.trim().length < 3) {
-        setSuggestions([]);
-        return;
-      }
+    if (!e || e.trim().length < 3) {
+      setErreur(
+        "Veuillez saisir au moins 3 caractères pour lancer la recherche",
+      );
+      setSuggestions([]);
+      return;
+    }
 
-      try {
-        const result = await rechercherVille(searchQuery);
-        console.log("Suggestions de villes :" +result.data);
+    setErreur("");
 
-        setSuggestions(result.data);
-      } catch (error) {
-        console.error(error);
-      }
-    };
+    try {
+      const result = await rechercherVille(e);
+      setSuggestions(result.data);
+    } catch (error) {
+      console.error(error);
+    }
+  }, []);
 
-const villeSelectionnee = (suggestion) => {
-  console.log("Ville selectionnee");
-  console.log(suggestion);
+  const rechercher = useCallback(async () => {
+    if (!searchQuery || searchQuery.trim().length < 3) {
+      setErreur(
+        "Veuillez saisir au moins 3 caractères pour lancer la recherche",
+      );
+      setSuggestions([]);
+      return;
+    }
 
-  // Forward au parebt
-  onVilleSelectionnee?.(suggestion);
+    try {
+      const result = await rechercherVille(searchQuery);
+      setSuggestions(result.data);
+    } catch (error) {
+      console.error(error);
+    }
+  }, [searchQuery]);
+  const villeSelectionnee = (suggestion) => {
+    console.log("Ville selectionnee");
+    console.log(suggestion);
 
-  setSearchQuery(suggestion.display_name);
+    // Forward au parebt
+    setVilleSelectionnee?.(suggestion);
 
-  setSuggestions([]);
-};
+    setSearchQuery(suggestion.display_name);
+
+    setSuggestions([]);
+  };
 
   return (
     <RechercheOverlay>
@@ -86,19 +108,23 @@ const villeSelectionnee = (suggestion) => {
         type="text"
         value={searchQuery}
         onChange={(e) => recupererSuggestions(e.target.value)}
-      
+      ></RechercheInput>
+      <button
+        onClick={rechercher}
+        disabled={!searchQuery || searchQuery.trim().length < 3}
       >
-        </RechercheInput>
-            <button onClick={rechercher}>🔍</button>
-      <SuggestionsListe >
-        {suggestions.map((suggestion) => (
+        🔍
+      </button>
+      <SuggestionsListe>
+        {suggestionsMemo.map((suggestion) => (
           <Suggestion
-          key={suggestion.place_id}
-          villeSuggeree={suggestion}
-          onSelect={villeSelectionnee}
-        />
+            key={suggestion.place_id}
+            villeSuggeree={suggestion}
+            onSelect={villeSelectionnee}
+          />
         ))}
       </SuggestionsListe>
+      {erreur && <MessageErreur>{erreur}</MessageErreur>}
     </RechercheOverlay>
   );
 }

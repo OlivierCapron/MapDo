@@ -1,7 +1,7 @@
 import styled from "styled-components";
 
 import ChampRecherche from './ChampRecherche';
-
+import { useAppContext } from "../hook/useAppContext";
 
 
 const OverlayBarreRecherche = styled.div`
@@ -19,8 +19,8 @@ const OverlayBarreRecherche = styled.div`
     0 2px 8px rgba(0, 0, 0, 0.08);
 
   backdrop-filter: blur(4px);
-  width: 420px;
-}`
+  width: min(420px, 90vw);
+  }`
 const TitreBarreRecherche = styled.span`
 display: block;
   margin-bottom: 8px;
@@ -28,14 +28,13 @@ display: block;
   font-size: 16px;
   color: rgb(0, 0, 0)
 `
-function BarreRecherche({ onVilleSelectionnee }) {
+function BarreRecherche() {
 
- 
   
      return (
       <OverlayBarreRecherche>
         <TitreBarreRecherche>Rechercher un restaurant</TitreBarreRecherche>
-       <ChampRecherche className="champ-recherche" onVilleSelectionnee={onVilleSelectionnee} ></ChampRecherche>
+       <ChampRecherche className="champ-recherche" ></ChampRecherche>
       </OverlayBarreRecherche>
   );
 }

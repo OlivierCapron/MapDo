@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import styled from "styled-components";
-
+import { useAppContext } from "../hook/useAppContext";
 const DetailsRestaurantOverlay = styled.div`
   position: absolute;
   bottom: 0px;
@@ -39,7 +39,9 @@ const DetailsRestaurantBoutton = styled.button`
 `;
 
 const DetailsRestaurantTexte = styled.div``;
-function DetailsRestaurant({ restaurantSelectionne }) {
+function DetailsRestaurant() {
+
+    const { restaurantSelectionne } = useAppContext();
   console.log("DetailsRestaurant init ; " + restaurantSelectionne);
   const titre = restaurantSelectionne
     ? "Restaurant sélectionné"

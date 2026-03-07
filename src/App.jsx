@@ -3,8 +3,8 @@ import "./index.css";
 import Carte from './components/Carte'
 import BarreRecherche from './components/BarreRecherche';
 import DetailsRestaurant from './components/DetailsRestaurant';
-import { useState } from 'react';
 import styled from 'styled-components';
+import AppProvider from "./context/AppProvider";
 
 const Overlay = styled.div`
  font-family: sans-serif;
@@ -13,15 +13,14 @@ const Overlay = styled.div`
  `
 function App() {
 
-  const [villeSelectionnee, setVilleSelectionnee] = useState(null);
-  const [restaurantSelectionne, setRestaurantSelectionne] = useState(null);
-
   return (
+    <AppProvider>
     <Overlay>
-      <BarreRecherche onVilleSelectionnee={setVilleSelectionnee}></BarreRecherche>
-      <Carte villeSelectionnee={villeSelectionnee} setRestaurantSelectionne={setRestaurantSelectionne}></Carte>
-      <DetailsRestaurant restaurantSelectionne={restaurantSelectionne}></DetailsRestaurant>
+      <BarreRecherche></BarreRecherche>
+      <Carte></Carte>
+      <DetailsRestaurant></DetailsRestaurant>
     </Overlay>
+    </AppProvider>
   )
 }
 
