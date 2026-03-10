@@ -1,5 +1,6 @@
 import { createSlice } from "@reduxjs/toolkit";
 
+// Methoe via Redux Toolkit
 const restaurantSlice = createSlice({
   name: "restaurant",
   initialState: {

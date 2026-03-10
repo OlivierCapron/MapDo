@@ -10,10 +10,14 @@ import { store } from "./store/store";
 
 const Overlay = styled.div`
   font-family: sans-serif;
+  font:Inter;
   height: 100%;
   width: 100%;
 `;
 function App() {
+  // Provider de redux
+    // Provider de AppContext 
+
   return (
     <Provider store={store}>
       <AppProvider>

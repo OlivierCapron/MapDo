@@ -10,17 +10,28 @@ const DetailsRestaurantOverlay = styled.div`
 
   background: rgba(255, 255, 255, 0.9);
   padding: 20px 24px;
-  border-radius: 20px 20px 0px 0px;
-  box-shadow: 0 -8px 3px rgba(0, 0, 0, 0.25);
+  border-radius: 16px 16px 0px 0px;
+  box-shadow: 0px -4px 4px 0px #00000040;
   backdrop-filter: blur(2px);
   width: 100%;
   box-sizing: border-box;
 `;
 
+
+
+
 const DetailsRestaurantTitre = styled.div`
   font-weight: 600;
   font-size: 16px;
   margin-bottom: 8px;
+
+font-weight: 700;
+font-style: Bold;
+font-size: 14px;
+leading-trim: NONE;
+line-height: 100%;
+letter-spacing: 0%;
+
 `;
 
 const DetailsRestaurantBoutton = styled.button`

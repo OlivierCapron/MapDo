@@ -79,7 +79,7 @@ test("affiche le bouton choisir dans le popup", async () => {
     </Provider>
   );
 
-  const bouton = await screen.findByText("Choisir");
+  const bouton = await screen.findByTestId("choisir");
 
   expect(bouton).toBeInTheDocument();
 });

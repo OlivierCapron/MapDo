@@ -11,20 +11,35 @@ const RechercheOverlay = styled.div`
   flex-wrap: wrap;
 `;
 
+
+
+const RechercheButton = styled.div`
+
+  `;
+
 const RechercheInput = styled.input`
   flex: 1;
-  height: 42px;
+  height: 26px;
+  top: 35px;
+left: 13px;
   padding: 0 14px;
-  border-radius: 10px;
-  border: 2px solid #9b9b9b;
+  border-radius: 4px;
+  angle: 0 deg;
+opacity: 1;
+border-width: 1px;
+
+  border: 1px solid #7D7D7
   background: #ffffff;
-  font-family: "Inter", sans-serif;
-  font-size: 14px;
   color: #333;
   transition:
     border 0.2s ease,
     box-shadow 0.2s ease;
 `;
+
+
+
+
+
 
 const SuggestionsListe = styled.div`
   margin-top: 0px;
@@ -109,12 +124,19 @@ function ChampRecherche() {
         value={searchQuery}
         onChange={(e) => recupererSuggestions(e.target.value)}
       ></RechercheInput>
-      <button
-        onClick={rechercher}
-        disabled={!searchQuery || searchQuery.trim().length < 3}
-      >
-        🔍
-      </button>
+
+  <RechercheButton  onClick={rechercher}
+        disabled={!searchQuery || searchQuery.trim().length < 3}>
+          <svg width="26" height="26" viewBox="0 0 26 26" fill="none" xmlns="http://www.w3.org/2000/svg">
+<rect width="26" height="26" rx="8" fill="#F0C900"/>
+<path d="M12.7917 17.4583C15.9213 17.4583 18.4583 14.9213 18.4583 11.7917C18.4583 8.66205 15.9213 6.125 12.7917 6.125C9.66205 6.125 7.125 8.66205 7.125 11.7917C7.125 14.9213 9.66205 17.4583 12.7917 17.4583Z" stroke="black" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+<path d="M19.875 18.875L16.7938 15.7938" stroke="black" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+</svg>
+
+        </RechercheButton>
+      
+      
+        
       <SuggestionsListe>
         {suggestionsMemo.map((suggestion) => (
           <Suggestion

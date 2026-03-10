@@ -13,30 +13,69 @@ import { useDispatch } from "react-redux";
 import { setRestaurantSelectionne } from "../store/restaurantSlice";
 
 const PopupContenu = styled.div`
-display: flex;
-  flex-direction: column;
-  gap: 10px;
-  min-width: 180px;`
+
+  width: 2459;
+height: 1115;
+top: -217px;
+left: -547px;
+angle: 0 deg;
+opacity: 1;
+
+  `
 
 
  const PopupTitre = styled.div`
-  font-weight: 600;
-  font-size: 14px;`
+width: 239;
+height: 99;
+top: 11px;
+left: 16px;
+angle: 0 deg;
+opacity: 1;
+font-weight: 400;
+font-style: Regular;
+font-size: 12px;
+leading-trim: NONE;
+line-height: 100%;
+letter-spacing: 0%;
+
+
+`;
 
 
 const PopupBoutton = styled.button`
-  align-self: flex-start;  
-  padding: 8px 10px;
-  border-radius: 8px;
-  border: none;
-  background: #f0c900;
-  color: black;
-  cursor: pointer;
-  font-size: 13px;
-  font-weight: 600; 
-  &:hover {
-    background: #e0ba00;
-  }
+
+
+width: 79;
+height: 33;
+top: 77px;
+left: 12px;
+angle: 0 deg;
+opacity: 1;
+border-radius: 8px;
+padding-top: 8px;
+padding-right: 16px;
+padding-bottom: 8px;
+padding-left: 16px;
+gap: 10px;
+background: #F0C900;
+
+
+`;
+
+const TexteBoutton = styled.span`
+
+width: 47;
+height: 17;
+angle: 0 deg;
+opacity: 1;
+font-weight: 700;
+font-style: Bold;
+font-size: 14px;
+leading-trim: NONE;
+line-height: 100%;
+letter-spacing: 0%;
+
+
 `;
 function Carte() {
 
@@ -93,9 +132,9 @@ const dispatch = useDispatch();
                   <PopupTitre>
                     {restaurant.display_name}
                   </PopupTitre>
-                  <PopupBoutton  onClick={() => 
+                  <PopupBoutton data-testid="choisir" onClick={() => 
                       dispatch(setRestaurantSelectionne(restaurant))}
-                  >Choisir</PopupBoutton>
+                  ><TexteBoutton>Choisir</TexteBoutton></PopupBoutton>
                 </PopupContenu>
               </Popup>
             </Marker>

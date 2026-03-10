@@ -105,3 +105,8 @@ npm install -D jsdom
 npm install @reduxjs/toolkit react-redux
 
 LAncement : npx vitest
+
+## Prod
+
+npm run build
+
