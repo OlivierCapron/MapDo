@@ -65,7 +65,7 @@ function ChampRecherche() {
   const [erreur, setErreur] = useState("");
 
   const suggestionsMemo = useMemo(() => {
-    return suggestions;
+    return Array.isArray(suggestions) ? suggestions : [];
   }, [suggestions]);
 
   const recupererSuggestions = useCallback(async (e) => {
@@ -83,9 +83,10 @@ function ChampRecherche() {
 
     try {
       const result = await rechercherVille(e);
-      setSuggestions(result.data);
+      setSuggestions(Array.isArray(result?.data) ? result.data : []);
     } catch (error) {
       console.error(error);
+      setSuggestions([]);
     }
   }, []);
 
@@ -100,9 +101,10 @@ function ChampRecherche() {
 
     try {
       const result = await rechercherVille(searchQuery);
-      setSuggestions(result.data);
+      setSuggestions(Array.isArray(result?.data) ? result.data : []);
     } catch (error) {
       console.error(error);
+      setSuggestions([]);
     }
   }, [searchQuery]);
   const villeSelectionnee = (suggestion) => {

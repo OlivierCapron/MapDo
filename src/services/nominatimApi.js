@@ -1,7 +1,13 @@
 import axios from "axios";
 
+const envBaseUrl = import.meta.env.VITE_NOMINATIM_BASE_URL?.trim();
+const hasAbsoluteHttpUrl = /^https?:\/\//i.test(envBaseUrl ?? "");
+const NOMINATIM_BASE_URL = hasAbsoluteHttpUrl
+  ? envBaseUrl
+  : "https://nominatim.openstreetmap.org";
+
 const nominatimApi = axios.create({
-  baseURL: "/geo",
+  baseURL: NOMINATIM_BASE_URL,
 });
 
 export const rechercherVille = (query) =>
