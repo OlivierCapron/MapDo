@@ -1,20 +1,21 @@
 import { render, screen } from "@testing-library/react";
 import "@testing-library/jest-dom";
-import ChampRecherche from "./ChampRecherche";
-import AppProvider from "../context/AppProvider";
+import { expect, test, vi } from "vitest";
 
-import { expect, test } from "vitest";
+import BarreRecherche from "./BarreRecherche";
 
-test("affiche le champ de recherche", () => {
+vi.mock("./ChampRecherche", () => ({
+  default: () => <div data-testid="champ-recherche">Champ Recherche</div>,
+}));
 
-  render(
-    <AppProvider>
-      <ChampRecherche />
-    </AppProvider>
-  );
+test("affiche le titre de la barre de recherche", () => {
+  render(<BarreRecherche />);
 
-  const input = screen.getByRole("textbox");
+  expect(screen.getByText("Rechercher un restaurant")).toBeInTheDocument();
+});
 
-  expect(input).toBeInTheDocument();
+test("affiche le composant ChampRecherche", () => {
+  render(<BarreRecherche />);
 
+  expect(screen.getByTestId("champ-recherche")).toBeInTheDocument();
 });

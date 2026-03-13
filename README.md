@@ -85,12 +85,64 @@ npm install react-leaflet leaflet
 
 ##  Composants utilisés : 
 
-	- App : Composant de base qui centralise l'etat global de l'application
-	- Carte : affiche la carte, les marqueurs et gere le centrage suivant la position de l'utilisateur
-	- ChampRecherche : input de texte + Bouton de validation + Affichage des marqueurs
-	- ListeSuggestions : Affichage des suggestions + clic sur ville suggerée
-	- Marqueur : gere la popup avec les details du restaurant
-	- DetailsRestaurant : Contient les infos "Aucun restaurant selectionn" ou les details du restaurant
+Interface utilisateur
+
+	- Carte
+	- BarreRecherche
+	- DetailsRestaurant
+
+Recherche
+
+	- ChampRecherche
+	- Suggestion
+
+Gestion de la carte
+
+	- Geolocalisation
+	- CentreurMap
+
+
+Gestion de l’état global
+
+	- AppContext
+	- AppProvider
+
+
+
+
+App
+	- Composant racine de l’application.
+	- Initialise l’application React, le store Redux et centralise l’état global partagé.
+
+Carte
+	- Affiche la carte Leaflet, les marqueurs des restaurants et gère le chargement des restaurants à partir de l’API Nominatim lorsque la ville sélectionnée change.
+
+BarreRecherche
+	- Barre de recherche affichée en overlay au-dessus de la carte.
+	- Contient le titre et le composant ChampRecherche.
+
+ChampRecherche
+	- Champ de recherche permettant de saisir une ville, récupérer les suggestions et sélectionner une ville.
+	- Utilise l’API Nominatim pour rechercher les villes.
+
+Suggestion
+	- Composant affichant une des suggestions de ville cliquable dans la liste des résultats.
+
+DetailsRestaurant
+	- Composant affichant le restaurant sélectionné (ou un message si aucun restaurant n’est sélectionné).
+	- Les données sont recupérées du store Redux.
+
+CentreurMap
+	- Centre automatiquement la carte sur les restaurants trouvés en calculant les bounds.
+
+Geolocalisation
+	- centre la carte sur la position de l’utilisateur si autorisée.
+
+AppContext
+	- Contexte React utilisé pour partager certains états dans l’application.
+
+AppProvider
+	- Provider du contexte qui stocke la ville sélectionnée et le restaurant sélectionné
 
 
 On autocomplete les villes avec    https://nominatim.openstreetmap.org/search?<params>
@@ -104,9 +156,12 @@ npm install -D @testing-library/jest-dom
 npm install -D jsdom
 npm install @reduxjs/toolkit react-redux
 
-LAncement : npx vitest
+Lancement des tests: npx vitest
 
-## Prod
+## Packaging
 
 npm run build
 
+## Deploiement
+
+Dezipper le livrable derriere un serveur HTTP type Apache.
